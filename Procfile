@@ -1,1 +1,1 @@
-bot: gunicorn app:app
+bot: gunicorn app:build_app()

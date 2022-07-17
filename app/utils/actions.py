@@ -5,10 +5,10 @@ import os
 from random import choice, randint
 from csv import DictReader
 
-# import logging
+import logging
 import requests as r
 
-# logging.basicConfig(filename="log.log", encoding="utf-8", level=logging.ERROR)
+logging.basicConfig(filename="log.log", encoding="utf-8", level=logging.ERROR)
 
 path = os.path.dirname(os.path.abspath(__file__))
 API_URL = f"https://api.telegram.org/bot{API_KEY}"
@@ -35,10 +35,9 @@ def send_message(chat_id, message_id, message, reply=False, parse_mode="Markdown
     api_result = r.get(f"{API_URL}/sendMessage", data=data)
 
     if api_result.status_code != 200:
-        ...
-        """logging.error(
+        logging.error(
             f"Error: {api_result.json()['description']} while sending message."
-        )"""
+        )
 
 
 def send_sticker(chat_id, filename=None, reuse=False, file_id=None):
@@ -52,9 +51,9 @@ def send_sticker(chat_id, filename=None, reuse=False, file_id=None):
 
     if api_result.status_code != 200:
         ...
-        """logging.error(
+        logging.error(
             f"Error: {api_result.json()['description']} while sending sticker."
-        )"""
+        )
     return api_result.json()["result"]["sticker"]["file_id"]
 
 

@@ -21,11 +21,16 @@ def select_word():
         return word
 
 
-def send_message(chat_id, message_id, message, reply=False):
+def send_message(chat_id, message_id, message, reply=False, parse_mode="MarkdownV2"):
     if reply:
-        data = {"chat_id": chat_id, "reply_to_message_id": message_id, "text": message}
+        data = {
+            "chat_id": chat_id,
+            "reply_to_message_id": message_id,
+            "text": message,
+            "parse_mode": parse_mode,
+        }
     else:
-        data = {"chat_id": chat_id, "text": message}
+        data = {"chat_id": chat_id, "text": message, "parse_mode": parse_mode}
 
     api_result = r.get(f"{API_URL}/sendMessage", data=data)
 

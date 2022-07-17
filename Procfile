@@ -1,1 +1,1 @@
-bot: gunicorn wsgi:app
+bot: gunicorn flask_app:app

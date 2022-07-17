@@ -1,1 +1,1 @@
-bot: gunicorn app:build_app
+bot: flask run

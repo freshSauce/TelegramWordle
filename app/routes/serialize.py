@@ -20,8 +20,8 @@ def receive_info():
             args = []
 
         if command == "/newgame":
-            game = new_game(chat_id, user_id)
             if not games.get(user_id):
+                game = new_game(chat_id, user_id)
                 games[user_id] = game
                 send_message(chat_id, msg_id, "¡Juego creado!", reply=True)
                 file_id = send_sticker(chat_id, filename="tiles-container.webp")
@@ -56,7 +56,7 @@ def receive_info():
                 if game.verify_guess(guess):
                     send_message(chat_id, msg_id, "¡Felicidades, ganaste!")
                     os.remove(f"{path}/{game.filename}")
-                    games[user_id] = ""
+                    del games[user_id]
                 else:
                     if game.level != 6:
                         file_id = send_sticker(chat_id, filename=game.filename)
@@ -67,11 +67,11 @@ def receive_info():
                         send_sticker(chat_id, filename=game.filename)
                         send_message(chat_id, msg_id, "¡Has perdido!")
                         os.remove(f"{path}/{game.filename}")
-                        games[user_id] = ""
+                        del games[user_id]
                         send_message(chat_id, msg_id, f"La palabra era {game.word}")
         elif command == "/giveup":
             send_message(chat_id, msg_id, "Una lástima ;( ¡Mejor suerte a la próxima!")
-            games[user_id] = ""
+            del games[user_id]
         elif command == "/start" or command == "/help":
             send_message(chat_id, msg_id, start_message)
         return Response("Ok", 200)

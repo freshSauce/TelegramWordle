@@ -1,7 +1,6 @@
 import os
 from flask import request, Response
-from app.utils.actions import new_game, send_message, send_sticker
-
+from app.utils.actions import new_game, send_message, send_sticker, path
 
 games = {}
 
@@ -10,6 +9,8 @@ def receive_info():
     if request.method == "POST":
         data = request.get_json(force=True)
         text, chat_id, chat_type, msg_id, user_id = getlastMsg(data)
+        if text is None:
+            return Response("Ok", 200)
         splitted_text = text.strip().split(" ")
         command = text.split(" ")[0]
         if len(splitted_text) >= 2:
@@ -22,11 +23,12 @@ def receive_info():
             if not games.get(user_id):
                 games[user_id] = game
                 send_message(chat_id, msg_id, "¡Juego creado!", reply=True)
-                send_sticker(chat_id, "tiles-container.webp")
+                file_id = send_sticker(chat_id, filename="tiles-container.webp")
+                game._telegram_id = file_id
             else:
                 game = games[user_id]
-                send_message(chat_id, msg_id, "!Tienes un juego en curso!", reply=True)
-                send_sticker(chat_id, game.filename)
+                send_message(chat_id, msg_id, "¡Tienes un juego en curso!", reply=True)
+                send_sticker(chat_id, reuse=True, file_id=game._telegram_id)
             return Response("Ok", 200)
         elif command == "/guess" and args:
             guess = args[0]
@@ -51,21 +53,23 @@ def receive_info():
             else:
                 game = games[user_id]
                 if game.verify_guess(guess):
-                    send_sticker(chat_id, game.filename)
                     send_message(chat_id, msg_id, "¡Felicidades, ganaste!")
-                    os.remove(game.filename)
+                    os.remove(f"{path}/{game.filename}")
                     games[user_id] = ""
                 else:
                     if game.level != 6:
-                        send_sticker(chat_id, game.filename)
+                        file_id = send_sticker(chat_id, filename=game.filename)
+                        game._telegram_id = file_id
                         send_message(chat_id, msg_id, "¡Sigue intentando!")
-                        os.remove(game.filename)
+                        os.remove(f"{path}/{game.filename}")
                     else:
-                        send_sticker(chat_id, game.filename)
+                        send_sticker(chat_id, filename=game.filename)
                         send_message(chat_id, msg_id, "¡Has perdido!")
-                        os.remove(game.filename)
+                        os.remove(f"{path}/{game.filename}")
                         games[user_id] = ""
                         send_message(chat_id, msg_id, f"La palabra era {game.word}")
+        elif command == "/finish":
+            ...
         return Response("Ok", 200)
 
     else:

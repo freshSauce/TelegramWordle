@@ -9,7 +9,7 @@ class Wordle:
     def __init__(self, word, chat_id, user_id, word_url):
         self.word = word.upper()
         self._word_url = word_url
-
+        self._telegram_id = ""
         self.chat_id = chat_id
         self.user_id = user_id
         self.level = 0
@@ -42,7 +42,7 @@ class Wordle:
                 )
                 self._x += 59
             self.filename = f"{str(uuid4())}.webp"
-            self._board.save(self.filename)
+            self._board.save(f"{path}/{self.filename}")
             return True
 
         else:
@@ -63,6 +63,6 @@ class Wordle:
                 self._x += 59
         self._y += 58
         self.filename = f"{str(uuid4())}.webp"
-        self._board.save(self.filename)
+        self._board.save(f"{path}/{self.filename}")
         self.level += 1
         return False

@@ -36,16 +36,21 @@ def send_message(chat_id, message_id, message, reply=False):
         )"""
 
 
-def send_sticker(chat_id, board):
-    sticker = open(f"{path}\\{board}", "rb")
-    api_result = r.get(
-        f"{API_URL}/sendSticker?chat_id={chat_id}", files={"sticker": sticker}
-    )
+def send_sticker(chat_id, filename=None, reuse=False, file_id=None):
+    if not reuse:
+        sticker = open(f"{path}\\{filename}", "rb")
+        api_result = r.get(
+            f"{API_URL}/sendSticker?chat_id={chat_id}", files={"sticker": sticker}
+        )
+    else:
+        api_result = r.get(f"{API_URL}/sendSticker?chat_id={chat_id}&sticker={file_id}")
+
     if api_result.status_code != 200:
         ...
         """logging.error(
             f"Error: {api_result.json()['description']} while sending sticker."
         )"""
+    return api_result.json()["result"]["sticker"]["file_id"]
 
 
 def new_game(chat_id, user_id):

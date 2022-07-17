@@ -1,1 +1,1 @@
-bot: flask run
+bot: python app.py

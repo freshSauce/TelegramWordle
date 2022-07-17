@@ -19,7 +19,7 @@ def select_word():
         return word
 
 
-def send_message(chat_id, message_id, message, reply=False, parse_mode="Markdown "):
+def send_message(chat_id, message_id, message, reply=False, parse_mode="Markdown"):
     if reply:
         data = {
             "chat_id": chat_id,

@@ -1,4 +1,4 @@
-from serialize import receive_info
+from app.routes.serialize import receive_info
 
 
 def add_routes(app):

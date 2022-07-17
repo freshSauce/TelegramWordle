@@ -1,12 +1,14 @@
-from csv import DictReader
-from game import Wordle
+from app.utils.game import Wordle
+from app.utils.config import API_KEY
+
 import os
 from random import choice, randint
-import logging
-import requests as r
-from config import API_KEY
+from csv import DictReader
 
-#logging.basicConfig(filename="log.log", encoding="utf-8", level=logging.ERROR)
+# import logging
+import requests as r
+
+# logging.basicConfig(filename="log.log", encoding="utf-8", level=logging.ERROR)
 
 path = os.path.dirname(os.path.abspath(__file__))
 API_URL = f"https://api.telegram.org/bot{API_KEY}"

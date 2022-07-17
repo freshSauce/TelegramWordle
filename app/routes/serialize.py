@@ -1,6 +1,6 @@
 import os
 from flask import request, Response
-from actions import new_game, send_message, send_sticker
+from app.utils.actions import new_game, send_message, send_sticker
 
 
 games = {}

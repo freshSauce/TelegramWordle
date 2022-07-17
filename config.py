@@ -1,0 +1,5 @@
+PORT = 5000
+
+API_KEY = "1506742065:AAFVzd5m52yj4KA-_V6-MmcdKLaQdDugk-8"
+
+DEBUG = True

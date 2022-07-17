@@ -39,6 +39,8 @@ def receive_info():
                     chat_id, msg_id, "¡Introduce una palabra de 5 letras!", reply=True
                 )
             elif not games.get(user_id):
+                print(games)
+                print(user_id)
                 send_message(
                     chat_id,
                     msg_id,

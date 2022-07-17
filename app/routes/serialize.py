@@ -21,6 +21,7 @@ def receive_info():
 
         if command == "/newgame":
             if not games.get(user_id):
+                print(games)
                 game = new_game(chat_id, user_id)
                 games[user_id] = game
                 send_message(chat_id, msg_id, "¡Juego creado!", reply=True)

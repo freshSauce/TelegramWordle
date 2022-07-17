@@ -1,24 +1,30 @@
+import os
 from PIL import Image, ImageDraw, ImageFont
 from uuid import uuid4
+
+path = os.path.dirname(os.path.abspath(__file__))
 
 
 class Wordle:
     def __init__(self, word, chat_id, user_id, word_url):
         self.word = word.upper()
         self._word_url = word_url
+
         self.chat_id = chat_id
         self.user_id = user_id
         self.level = 0
         self.filename = "tiles-container.webp"
-        self._board = Image.open("tiles-container.jpg")
-        self._correct = Image.open("correct-background.jpg").resize(
+        self._board = Image.open(f"{path}/tiles-container.jpg")
+        self._correct = Image.open(f"{path}/correct-background.jpg").resize(
             (43, 43), Image.LANCZOS
         )
-        self._wrong = Image.open("wrong-background.jpg").resize((43, 43), Image.LANCZOS)
-        self._partial = Image.open("partially-correct-background.jpg").resize(
+        self._wrong = Image.open(f"{path}/wrong-background.jpg").resize(
             (43, 43), Image.LANCZOS
         )
-        self._font = ImageFont.truetype("Roboto-Regular.ttf", size=42)
+        self._partial = Image.open(f"{path}/partially-correct-background.jpg").resize(
+            (43, 43), Image.LANCZOS
+        )
+        self._font = ImageFont.truetype(f"{path}/Roboto-Regular.ttf", size=42)
         self._y = 11
 
     def verify_guess(self, guess):

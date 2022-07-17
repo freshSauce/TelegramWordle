@@ -142,6 +142,7 @@ The bot is pretty much user-friendly, for now, we only have 2 commands (excludin
 
 - /newgame - Used to create a new game. In case that user already started a game, a message will be sent.
 - /guess <word> - Used to make a guess. If user doesn't provide a valid word a message will be sent.
+- /giveup - Used to finish a game.
 
 And that's it! you now know how to use the bot:).
 

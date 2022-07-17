@@ -1,5 +1,6 @@
 import os
 from flask import request, Response
+from app.utils.start_message import message as start_message
 from app.utils.actions import new_game, send_message, send_sticker, path
 
 games = {}
@@ -68,8 +69,11 @@ def receive_info():
                         os.remove(f"{path}/{game.filename}")
                         games[user_id] = ""
                         send_message(chat_id, msg_id, f"La palabra era {game.word}")
-        elif command == "/finish":
-            ...
+        elif command == "/giveup":
+            send_message(chat_id, msg_id, "Una lástima ;( ¡Mejor suerte a la próxima!")
+            games[user_id] = ""
+        elif command == "/start" or command == "/help":
+            send_message(chat_id, msg_id, start_message)
         return Response("Ok", 200)
 
     else:

@@ -38,7 +38,7 @@ def send_message(chat_id, message_id, message, reply=False):
 
 def send_sticker(chat_id, filename=None, reuse=False, file_id=None):
     if not reuse:
-        sticker = open(f"{path}\\{filename}", "rb")
+        sticker = open(f"{path}/{filename}", "rb")
         api_result = r.get(
             f"{API_URL}/sendSticker?chat_id={chat_id}", files={"sticker": sticker}
         )

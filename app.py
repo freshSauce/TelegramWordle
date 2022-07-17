@@ -1,10 +1,12 @@
 from flask import Flask
 from config import DEBUG, PORT
-from routes import add_routes
+from serialize import receive_info
 
 
 app = Flask(__name__)
-add_routes(app)
+
+
+app.add_url_rule("/receive_info", view_func=receive_info, methods=["POST", "GET"])
 
 
 if __name__ == "__main__":

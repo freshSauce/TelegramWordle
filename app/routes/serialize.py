@@ -103,4 +103,4 @@ def getlastMsg(msg):
         msg_id = msg["edited_message"]["message_id"]
         user_id = msg["edited_message"]["from"]["id"]
 
-    return text, chat_id, chat_type, msg_id, user_id
+    return text, chat_id, chat_type, msg_id, str(user_id)

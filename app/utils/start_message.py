@@ -1,6 +1,6 @@
 message = """¡Bienvenido a TeleWordleES!
 
-Este bot busca asemejar lo mejor posible el famoso juego TeleWordle en el idioma español.
+Este bot busca asemejar lo mejor posible el famoso juego Wordle en el idioma español.
 
 ¿Cómo jugar?
 

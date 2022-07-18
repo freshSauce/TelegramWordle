@@ -19,7 +19,7 @@ def receive_info():
             args = []
         with shelve.open("games") as games:
             if command == "/newgame":
-                if user_id in games:
+                if user_id not in games:
                     print(games)
                     game = new_game(chat_id, user_id)
                     games[user_id] = game

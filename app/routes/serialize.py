@@ -16,7 +16,7 @@ def receive_info():
         if len(splitted_text) >= 2:
             args = text.split(" ")[1:]
         else:
-            args = []
+            args = [""]
         with shelve.open("games.db", writeback=True) as games:
             if command == "/newgame":
                 if user_id not in games:

@@ -8,7 +8,7 @@ path = os.path.dirname(os.path.abspath(__file__))
 class Wordle:
     def __init__(self, word, chat_id, user_id, word_url):
         self.word = word.upper()
-        self._word_url = word_url
+        self.word_url = word_url
         self._telegram_id = ""
         self.chat_id = chat_id
         self.user_id = user_id

@@ -72,7 +72,11 @@ def receive_info():
                             send_message(chat_id, msg_id, "¡Has perdido!")
                             os.remove(f"{path}/{game.filename}")
                             del games[user_id]
-                            send_message(chat_id, msg_id, f"La palabra era {game.word}")
+                            send_message(
+                                chat_id,
+                                msg_id,
+                                f"La palabra era [{game.word}]({game.word_url})",
+                            )
             elif command == "/giveup":
                 send_message(
                     chat_id, msg_id, "Una lástima ;( ¡Mejor suerte a la próxima!"

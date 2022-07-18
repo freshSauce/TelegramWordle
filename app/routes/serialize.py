@@ -17,7 +17,7 @@ def receive_info():
             args = text.split(" ")[1:]
         else:
             args = [""]
-        with shelve.open("games.db", writeback=True) as games:
+        with shelve.open("fcg.db", writeback=True) as games:
             if command == "/newgame":
                 if user_id not in games:
                     game = new_game(chat_id, user_id)

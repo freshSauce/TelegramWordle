@@ -19,7 +19,7 @@ def receive_info():
             args = []
         with shelve.open("games") as games:
             if command == "/newgame":
-                if not games[user_id]:
+                if user_id in games:
                     print(games)
                     game = new_game(chat_id, user_id)
                     games[user_id] = game
@@ -41,7 +41,7 @@ def receive_info():
                         "¡Introduce una palabra de 5 letras!",
                         reply=True,
                     )
-                elif not games[user_id]:
+                elif user_id in games:
                     print(games)
                     print(user_id)
                     send_message(

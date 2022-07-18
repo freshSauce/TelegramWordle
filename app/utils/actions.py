@@ -1,3 +1,5 @@
+# Dedicated to my gf, who helps me make possible every dream I have, even the most ambitious ones.
+
 from app.utils.game import Wordle
 from app.utils.config import API_KEY
 

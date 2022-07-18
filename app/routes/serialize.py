@@ -57,6 +57,7 @@ def receive_info():
                 else:
                     game = games[user_id]
                     if game.verify_guess(guess):
+                        send_sticker(chat_id, filename=game.filename)
                         send_message(chat_id, msg_id, "¡Felicidades, ganaste!")
                         os.remove(f"{path}/{game.filename}")
                         del games[user_id]
